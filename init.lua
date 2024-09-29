@@ -360,60 +360,27 @@ require('lazy').setup({
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    event = 'VeryLazy', -- Sets the loading event to 'VimEnter'
     opts = {},
     keys = {
       {
-        '<leader>c',
+        '<leader>?',
         function()
-          require('which-key').show 'which_key_ignore'
+          require('which-key').show { global = false }
         end,
-        desc = 'Show [C]ode keymap',
-      },
-      {
-        '<leader>d',
-        function()
-          require('which-key').show 'which_key_ignore'
-        end,
-        desc = 'Show [D]ocument keymap',
-      },
-      {
-        '<leader>r',
-        function()
-          require('which-key').show 'which_key_ignore'
-        end,
-        desc = 'Show [R]ename keymap',
-      },
-      {
-        '<leader>s',
-        function()
-          require('which-key').show 'which_key_ignore'
-        end,
-        desc = '[S]earch',
-      },
-      {
-        '<leader>w',
-        function()
-          require('which-key').show 'which_key_ignore'
-        end,
-        desc = '[W]orkspace',
-      },
-      {
-        '<leader>t',
-        function()
-          require('which-key').show 'which_key_ignore'
-        end,
-        desc = '[T]oggle',
-      },
-      {
-        '<leader>h',
-        function()
-          require('which-key').show 'which_key_ignore'
-        end,
-        desc = '[H]unk',
+        desc = 'Buffer Local Keymaps (which-key)',
       },
     },
   },
+  -- require('which-key').add {
+  --   { '<leader>c', group = '[C]ode' },
+  --   { '<leader>g', group = '[G]it' },
+  --   { '<leader>l', group = '[L]SP' },
+  --   { '<leader>s', group = '[S]earch' },
+  --   { '<leader>t', group = '[T]oggle' },
+  --   { '<leader>w', group = '[W]indow' },
+  --   { '<leader>?', group = '[?] Help' },
+  -- },
 
   -- NOTE: Plugins can specify dependencies.
   --
@@ -483,6 +450,20 @@ require('lazy').setup({
             require('telescope.themes').get_dropdown(),
           },
         },
+      }
+
+      -- Which key keymap
+      local wk = require 'which-key'
+      wk.add {
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>b', group = '[B]uffer' },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>g', group = '[G]it' },
+        { '<leader>l', group = '[L]SP' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>w', group = '[W]indow' },
+        { '<leader>?', group = '[?] Help' },
       }
 
       -- Enable Telescope extensions if they are installed
@@ -694,7 +675,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
+        ts_ls = {},
         --
         lua_ls = {
           -- cmd = {...},
